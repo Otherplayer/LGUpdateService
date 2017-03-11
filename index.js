@@ -19,7 +19,6 @@ app.use(function(req, res, next) {
 });
 
 app.get('/login',function (request,response) {
-    console.log(request.body);
     response.send(cool());
 });
 
@@ -29,26 +28,16 @@ app.post('/update', jsonParser, function(request, response) {
     var reqParams = request.body.result;
     logger(reqParams);
 
-    // if (reqParams['action']['name'] != 'postalcode.action'){
-    //     return {};
-    // }
-    // var parameters = reqParams.action["parameters"];
-    // var zone = parameters["geo-city"];
-    // var post = cost[zone];
-    // var speech = "您好，" + zone + " 的邮编是 " + post + " 。";
-    // if (!post || post == 'undefined'){
-    //     speech = '不好意思，未能查询到' + zone + '的邮编。';
-    // }
-    // logger(speech);
-    //
-    // var result = {
-    //     "speech": speech,
-    //     "displayText": speech,
-    //     "source": "online-postal-code-query"
-    // };
-    //
-    // if (!request.body) return request.sendStatus(400);
-    // response.send(result);
+    if (!reqParams || !reqParams['v']){
+        if (!request.body) return request.sendStatus(400);
+    }
+
+    if (reqParams['v'] != 'v1.0'){
+        response.send({'shouldupdate':1,'url':'https://www.baidu.com'});
+    }else{
+        response.send({'shouldupdate':0,'url':''});
+    }
+
 
 });
 
