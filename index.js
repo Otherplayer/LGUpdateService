@@ -22,7 +22,7 @@ app.get('/login',function (request,response) {
     response.send(cool());
 });
 
-//// POST /webhook gets JSON bodies
+//// POST gets JSON bodies
 app.post('/update', jsonParser, function(request, response) {
 
     var reqParams = request.body;
@@ -31,7 +31,7 @@ app.post('/update', jsonParser, function(request, response) {
     if (!reqParams || !reqParams['v']) return request.sendStatus(400);
 
     if (reqParams['v'] != 'v1.0'){
-        response.send({'shouldupdate':1,'url':'https://www.baidu.com'});
+        response.send({'shouldupdate':1,'immediate':0,'url':'https://www.baidu.com'});
     }else{
         response.send({'shouldupdate':0,'url':''});
     }
