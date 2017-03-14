@@ -30,7 +30,7 @@ app.post('/update', jsonParser, function(request, response) {
 
     if (!reqParams || !reqParams['v']) return request.sendStatus(400);
 
-    if (reqParams['v'] != 'v1.0'){
+    if (reqParams['v'] != 'v1.1'){
         response.send({'shouldupdate':1,'immediate':0,'url':'https://www.pgyer.com/ltOx','reason':'bug fix and dirty value detection'});
     }else{
         response.send({'shouldupdate':0,'url':''});
